@@ -7,8 +7,11 @@
 cd mkosi
 git pull
 
-# run tests (see: https://systemd.io/HACKING/)
+# make sure we are up to date on liberated systemd
 cd ../systemd
+git pull # this pulls from my fork (https://github.com/Jeffrey-Sardina/systemd)
+
+# run tests (see: https://systemd.io/HACKING/)
 ../mkosi/bin/mkosi -f genkey
 ../mkosi/bin/mkosi -f box -- meson setup build
 ../mkosi/bin/mkosi -f box -- meson compile -C build mkosi
