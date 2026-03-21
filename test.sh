@@ -12,4 +12,4 @@ cd ../systemd
 ../mkosi/bin/mkosi -f genkey
 ../mkosi/bin/mkosi -f box -- meson setup build
 ../mkosi/bin/mkosi -f box -- meson compile -C build mkosi
-../mkosi/bin/mkosi vm
+sudo ../mkosi/bin/mkosi vm
