@@ -7,6 +7,10 @@ Currently, this is nothing fancy. Once changes are made to the `systemd` fork, a
 
 New pushes of Liberated `systemd` code are only made once tests pass.
 
+## How to use this repo
+1. Use the commands in `setup.sh` to configure the environment. Note that the first line (commended out) will vary on your OS -- make sure you have the correct keyring app installed for your distro. The remaining commands will clone `mkosi` and Liberated `systemd`.
+2. Use `test.sh` to run the tests. Monitor the terminal and check to see if the VM launches correctly.
+
 ## TODO list
 There are several tasks I am currently working on to streamline the process of updating and testing Liberated `systemd`. If you want to help the project, this would be a great place to step in!
 

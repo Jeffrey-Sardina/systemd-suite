@@ -9,7 +9,9 @@ git pull
 
 # make sure we are up to date on liberated systemd
 cd ../systemd
-git pull # this pulls from my fork (https://github.com/Jeffrey-Sardina/systemd)
+git pull # this pulls from Liberated `systemd` (https://github.com/Jeffrey-Sardina/systemd)
+git fetch upstream # get the new updates from base `systemd`
+git merge upstream/main
 
 # testing (see: https://systemd.io/HACKING/)
 ## do some setup for the tests
