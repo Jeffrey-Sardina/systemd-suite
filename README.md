@@ -23,6 +23,8 @@ A note on the second part -- age verification in `systemd` was / is very much a 
 ## Contributing and Licensing
 This repo is made available under the same license as base `systemd` and Liberated `systemd`: the GNU General Public License v2. All code contributions must be made available under the same license.
 
+Please note that PRs including AI-generated code, be it correct or incorrect, will be rejected until re-written by a human.
+
 ## Liberated `systemd` source code
 You can find Liberated `systemd` here:
 - github - https://github.com/Jeffrey-Sardina/systemd
