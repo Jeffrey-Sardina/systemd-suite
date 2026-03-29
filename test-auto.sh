@@ -31,7 +31,7 @@ su - $NON_ROOT_USER -c "echo 'process started at: $CURR_DATE' > $VM_LOG_FILE"
 echo "update mkosi -- needed for the CI tests"
 su - $NON_ROOT_USER -c "cd $MKOSI_DIR && git pull &>> $SETUP_LOG_FILE"
 
-# echo "make sure we are up to date on Liberated systemd"
+echo "make sure we are up to date on Liberated systemd"
 su - $NON_ROOT_USER -c "cd $SYSTEMD_PATH && git pull &>> $SETUP_LOG_FILE" # this pulls from Liberated `systemd`
 su - $NON_ROOT_USER -c "cd $SYSTEMD_PATH && git fetch upstream &>> $SETUP_LOG_FILE" # get the new updates from base `systemd`
 su - $NON_ROOT_USER -c "cd $SYSTEMD_PATH && git merge upstream/main -m 'merge base systemd changes into Liberated systemd' &>> $SETUP_LOG_FILE"

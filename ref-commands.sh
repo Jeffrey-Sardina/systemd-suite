@@ -1,7 +1,10 @@
+exit
+# this file is for reference -- not meant to be run
+
 # one-off runs -- background setup
-# apt install debian-archive-keyring # for some reason mkosi does not like ubuntu-keyring (?)
-# git clone https://github.com/systemd/mkosi.git # pull mkosi if it's not there already
-# git clone https://github.com/Jeffrey-Sardina/systemd.git # pull the fork of systemd if it's not there already
+apt install debian-archive-keyring # for some reason mkosi does not like ubuntu-keyring (?)
+git clone https://github.com/systemd/mkosi.git # pull mkosi if it's not there already
+git clone https://github.com/Jeffrey-Sardina/systemd.git # pull the fork of systemd if it's not there already
 
 # update mkosi -- needed for the CI tests
 cd mkosi

@@ -11,6 +11,14 @@ New pushes of Liberated `systemd` code are only made once tests pass.
 1. Use the commands in `setup.sh` to configure the environment. Note that the first line (commended out) will vary on your OS -- make sure you have the correct keyring app installed for your distro. The remaining commands will clone `mkosi` and Liberated `systemd`.
 2. Use `test.sh` to run the tests. Monitor the terminal and check to see if the VM launches correctly.
 
+## How this works
+Liberated `systemd` uses git patches to patch out surveillance enablement in base `systemd`. The patch used can be found in `main.patch`. If you want to know *exactly* what is removed in systemd code, this file will tell you all of that.
+
+Note that README changes are not included in that patch. The Liberated `systemd` readme is maintained separately, because:
+1. The patch is meant to be minimal, and (mostly) constant. It should not have to change every time I find a typo in the readme, or add a sentence.
+2. it is not a code component, and therefore is not needed for the patch to work
+3. I have no reason to expect hard-to-merge changes arising due in a README file
+
 ## TODO list
 There are several tasks I am currently working on to streamline the process of updating and testing Liberated `systemd`. If you want to help the project, this would be a great place to step in!
 

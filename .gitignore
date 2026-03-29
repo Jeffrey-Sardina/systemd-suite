@@ -1,3 +1,5 @@
 mkosi/
 systemd/
+liberated-READMEs/*
+test-copies/
 *.log
