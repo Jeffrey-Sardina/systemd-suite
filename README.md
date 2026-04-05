@@ -20,13 +20,13 @@ Note that README changes are not included in that patch. The Liberated `systemd`
 3. I have no reason to expect hard-to-merge changes arising due in a README file
 
 ## TODO list
-There are several tasks I am currently working on to streamline the process of updating and testing Liberated `systemd`. If you want to help the project, this would be a great place to step in!
+There are several tasks I am currently working on to improve Liberated `systemd`. If you want to help the project, this would be a great place to step in!
 
 Here's what I still need to do:
-1. automate everything from test -> commit -> push. Right now, testing is 99% automatic -- but I have to check the VM at the end and verify it is up. I'd like to get this to instead return 1 (passed) or 0 (failed) with an error message. Once that's done, it's a simple bash script to automate commits and pushes.
-2. automate merging new code from base `systemd`. The idea here is to detect whenever a commit is made to `systemd/main`, pull the data, and auto-merge it. After that, this could be connected to the test -> commit -> push pipeline to functionally automate updating Liberated `systemd`.
-
-A note on the second part -- age verification in `systemd` was / is very much a tack-on, not a core part of the code. I expect that almost all updates to `systemd` won't conflict with the changes made to remove age verification, which means that in most cases this should be able to be done automatically. In reality, it will be necessary to implement human oversight before a push -- just in case *other* forms of surveillance are implemented, or if the manner in which age verification support is written in base `systemd` changes.
+1. Develop formal releases to mirror future named releases of base `systemd`. Liberated `systemd` mirrors all `systemd` updates as they happen -- it's akin to a basically a nightly build. This means that the more full range of testing expected of a named release is not yet present. As my goal is to enable use of Liberated `systemd` as a stable replacement to base `systemd`, developing releases will be very important.
+2. Related to the above, implementing a wider range of tests (for the named releases) to provide more confidence in their robustness.
+3. How-to guide on installing Liberated `systemd`. Lots of people want to port over, or are interested in the process. Getting an explainer would help in this process.
+4. Liberating `lib32-systemd`. It currently draws upon base `systemd`; a liberated version drawing on Liberated `systemd` would be ideal for those who depend on it.
 
 ## Contributing and Licensing
 This repo is made available under the same license as base `systemd` and Liberated `systemd`: the GNU General Public License v2. All code contributions must be made available under the same license.
