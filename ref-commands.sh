@@ -14,13 +14,15 @@ git pull
 cd ../systemd
 git pull # this pulls from Liberated `systemd` (https://github.com/Jeffrey-Sardina/systemd)
 git fetch upstream # get the new updates from base `systemd`
-git merge upstream/main
+git merge upstream/main # manually read through the commit notes before doing this to make sure no more surveillance is being added!
 
 # testing (see: https://systemd.io/HACKING/)
 ## do some setup for the tests
+## if these fail, it's probably an issue outside of Liberated systemd
 ../mkosi/bin/mkosi -f genkey
-../mkosi/bin/mkosi -f box -- meson setup build
+../mkosi/bin/mkosi -f box -- meson setup build # add --wipe to force re-build from scratch if needed.
 
 ## actually run the tests
+## if these fail, it's probably an issue within Liberated systemd
 ../mkosi/bin/mkosi -f box -- meson compile -C build mkosi
 sudo ../mkosi/bin/mkosi vm
