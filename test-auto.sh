@@ -43,6 +43,7 @@ su - $NON_ROOT_USER -c "cd $SYSTEMD_PATH && $MKOSI_DIR/bin/mkosi -f genkey &>> $
 su - $NON_ROOT_USER -c "echo '>>>>>>>>>>> mkosi -f box -- meson setup build >>>>>>>>>>>' &>> $BUILD_LOG_FILE"
 su - $NON_ROOT_USER -c "cd $SYSTEMD_PATH && $MKOSI_DIR/bin/mkosi -f box -- meson setup build &>> $BUILD_LOG_FILE"
 su - $NON_ROOT_USER -c "echo '>>>>>>>>>>> mkosi -f box -- meson compile -C build mkosi >>>>>>>>>>>' &>> $BUILD_LOG_FILE"
+su - $NON_ROOT_USER -c "cd $SYSTEMD_PATH && $MKOSI_DIR/bin/mkosi -f box -- meson test -C build --print-errorlogs -q &>> $BUILD_LOG_FILE"
 su - $NON_ROOT_USER -c "cd $SYSTEMD_PATH && $MKOSI_DIR/bin/mkosi -f box -- meson compile -C build mkosi &>> $BUILD_LOG_FILE"
 cd $SYSTEMD_PATH && $MKOSI_DIR/bin/mkosi vm &>> $VM_LOG_FILE & # run in the background so we can look for its output in this script
 pid=$!
