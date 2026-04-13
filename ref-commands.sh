@@ -20,7 +20,7 @@ git merge upstream/main # manually read through the commit notes before doing th
 ## do some setup for the tests
 ## if these fail, it's probably an issue outside of Liberated systemd
 ../mkosi/bin/mkosi -f genkey
-../mkosi/bin/mkosi -f box -- meson setup build # add --wipe to force re-build from scratch if needed.
+../mkosi/bin/mkosi -f box -- meson setup build --wipe # --wipe to forces it to re-build from scratch
 
 ## actually run the tests
 ## if these fail, it's probably an issue within Liberated systemd
