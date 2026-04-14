@@ -1,5 +1,7 @@
-exit
+#! /bin/bash
+
 # this file is for reference -- not meant to be run
+exit
 
 # one-off runs -- background setup
 apt install debian-archive-keyring # for some reason mkosi does not like ubuntu-keyring (?)
