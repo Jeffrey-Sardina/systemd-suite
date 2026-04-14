@@ -1,6 +1,6 @@
 # Liberated `systemd` -- testing and automation suite
 
-This is where I manage all testing and automation related tasks for Liberated `systemd` (https://github.com/Jeffrey-Sardina/systemd). 
+This is where I manage all testing and automation related tasks for Liberated `systemd` (https://github.com/Jeffrey-Sardina/systemd). You may also be interested in the dev log at `DEV-LOG.md`.
 
 ## The testing pipeline
 Currently, this is nothing fancy. Once changes are made to the `systemd` fork, all tests in `test.sh` are run. These are the same CI tests base `systemd` requires for all pull requests (see: https://systemd.io/HACKING/). In short, this consists of creating a VM running `systemd` from the (new) source code, and verifying that it runs.
@@ -24,9 +24,7 @@ There are several tasks I am currently working on to improve Liberated `systemd`
 
 Here's what I still need to do:
 1. Develop formal releases to mirror future named releases of base `systemd`. Liberated `systemd` mirrors all `systemd` updates as they happen -- it's akin to a basically a nightly build. This means that the more full range of testing expected of a named release is not yet present. As my goal is to enable use of Liberated `systemd` as a stable replacement to base `systemd`, developing releases will be very important.
-2. Related to the above, implementing a wider range of tests (for the named releases) to provide more confidence in their robustness.
-3. How-to guide on installing Liberated `systemd`. Lots of people want to port over, or are interested in the process. Getting an explainer would help in this process.
-4. Liberating `lib32-systemd`. It currently draws upon base `systemd`; a liberated version drawing on Liberated `systemd` would be ideal for those who depend on it.
+2. Liberating `lib32-systemd`. It currently draws upon base `systemd`; a liberated version drawing on Liberated `systemd` would be ideal for those who depend on it.
 
 ## Contributing and Licensing
 This repo is made available under the same license as base `systemd` and Liberated `systemd`: the GNU General Public License v2. All code contributions must be made available under the same license.
