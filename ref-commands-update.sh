@@ -1,6 +1,7 @@
 #! /bin/bash
 
 # this file is for reference -- not meant to be run
+echo "This file is just for reference. It's not meant to be run. Exiting."
 exit
 
 # one-off runs -- background setup

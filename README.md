@@ -9,7 +9,8 @@ New pushes of Liberated `systemd` code are only made once tests pass.
 
 ## How to use this repo
 1. Use the commands in `setup.sh` to configure the environment. Note that the first line (commended out) will vary on your OS -- make sure you have the correct keyring app installed for your distro. The remaining commands will clone `mkosi` and Liberated `systemd`.
-2. Use `test.sh` to run the tests. Monitor the terminal and check to see if the VM launches correctly.
+2. See the commands in `ref-commands-update.sh` to learn how to run updates and the test. Monitor the terminal and check to see if 1)all tests pass 2) the VM buildscorrectly,and 3) the VM launches correctly. Note that this file is there for reference -- you are not meant to run it.
+2. See the commands in `ref-commands-release.sh` to learn how to prepare a release. Note that this file is there for reference -- you are not meant to run it.
 
 ## How this works
 Liberated `systemd` uses git patches to patch out surveillance enablement in base `systemd`. The patch used can be found in `main.patch`. If you want to know *exactly* what is removed in systemd code, this file will tell you all of that.
