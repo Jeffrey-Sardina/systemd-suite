@@ -6,3 +6,7 @@ git clone https://github.com/systemd/mkosi.git # pull mkosi if it's not there al
 git clone https://github.com/Jeffrey-Sardina/systemd.git # pull the fork of systemd if it's not there already
 cd systemd/
 git remote add upstream https://github.com/systemd/systemd.git
+
+# these repos are only ever pushed to
+git remote add gitea https://gitea.com/Jeffrey-Sardina/systemd.git
+git remote add codeberg https://codeberg.org/Jeffrey-Sardina/systemd.git

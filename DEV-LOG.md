@@ -1,7 +1,9 @@
 # Liberated `systemd` -- dev log
 
 ## April 21, 2026
-Ran intosome failed builds whose origins are not yet clear to me. I'll keep working on this -- I have a hunch about the source. Expect an update in the next couple days, once I verify that Liberated systemd is correct.
+Ran into some failed builds whose origins are not yet clear to me. I'll keep working on this -- I have a hunch about the source. Expect an update in the next couple days, once I verify that Liberated `systemd` is correct.
+
+UPDATE: I've tracked this to an error in the mkosi build process that occurs with base `systemd` as well. Still searching for root cause, which could be in any number of places (and not necessarily in `systemd`). For obvious reasons, I won't do a push until I can verify that the code is working.
 
 ## April 16, 2026
 I have removed `test-auto.sh` from the repo, since I was not using it at all. There's definitely a better way to automate tests than what it does -- and in any case, `ref-commands.sh` is a much easier-to-read source of what commands are run in testing.
