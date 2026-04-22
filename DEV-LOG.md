@@ -1,6 +1,9 @@
 # Liberated `systemd` -- dev log
 
-## April 16 2026
+## April 21, 2026
+Ran intosome failed builds whose origins are not yet clear to me. I'll keep working on this -- I have a hunch about the source. Expect an update in the next couple days, once I verify that Liberated systemd is correct.
+
+## April 16, 2026
 I have removed `test-auto.sh` from the repo, since I was not using it at all. There's definitely a better way to automate tests than what it does -- and in any case, `ref-commands.sh` is a much easier-to-read source of what commands are run in testing.
 
 I have also removed `ref-release.sh` and plan to make releases through a simpler format -- download their release, apply the Liberated `systemd` patch to it, test it, and publish it. This way, there is much less room error, and the same end result of having no age verificaction enablement.
