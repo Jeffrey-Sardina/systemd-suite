@@ -1,5 +1,8 @@
 # Liberated `systemd` -- dev log
 
+## April 23, 2026
+The error was resolved by a later version of systemd. All tests and BM build now pass, so the code has been updated.
+
 ## April 21, 2026
 Ran into some failed builds whose origins are not yet clear to me. I'll keep working on this -- I have a hunch about the source. Expect an update in the next couple days, once I verify that Liberated `systemd` is correct.
 
