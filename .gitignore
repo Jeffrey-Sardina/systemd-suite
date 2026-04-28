@@ -1,5 +1,6 @@
 mkosi/
 systemd/
+systemd-base/
 liberated-READMEs/*
 releases/
 *.log
