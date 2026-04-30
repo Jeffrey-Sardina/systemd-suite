@@ -1,5 +1,14 @@
 # Liberated `systemd` -- dev log
 
+## April 30, 2026
+The test failure is not resolving upstream -- this is not the first time that failures have lasted nearly week upstream. As such, I am going to change my push criteria to the following:
+1. the VM `mkosi` running Liberated `systemd` from source runs
+2. Liberated `systemd` is *at least as stable as* base `systemd`.
+
+This means that if base `systemd` contains failed unit tests that also fail in Liberated `systemd`, Liberated systemd will still track upstream changes. This change was made necessary by the fact that base `systemd` often has long-standing (for a week or more) failed tests. If Liberated `systemd` did not track changes during this time, it would become far out of date.
+
+So basically: if you install Liberated `systemd` from source, you'll get something *as stable as* installing base `systemd` from source.
+
 ## April 27, 2026
 Ran into a test failure on the latest commits, although VMs built with them still run. I have replicated this error in base `systemd` as well -- it's not caused by Liberated `systemd`. As always, no changes will be merged until all tests pass. For now, I'm going to wait for a fix from upstream.
 

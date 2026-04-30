@@ -5,7 +5,13 @@ This is where I manage all testing and automation related tasks for Liberated `s
 ## The testing pipeline
 Currently, this is nothing fancy. Once changes are made to the `systemd` fork, all tests in `test.sh` are run. These are the same CI tests base `systemd` requires for all pull requests (see: https://systemd.io/HACKING/). In short, this consists of creating a VM running `systemd` from the (new) source code, and verifying that it runs.
 
-New pushes of Liberated `systemd` code are only made once tests pass.
+New pushes of Liberated `systemd` code are only made under two conditions:
+- Liberated `systemd` can be used to start a VM
+- Liberated `systemd` is *as stable as* base systemd.
+
+This means that if base `systemd` contains failed unit tests that also fail in Liberated `systemd`, Liberated systemd will still track upstream changes. This change was made necessary by the fact that base `systemd` often has long-standing (for a week or more) failed tests. If Liberated `systemd` did not track changes during this time, it would become far out of date.
+
+So basically: if you install Liberated `systemd` from source, you'll get something *as stable as* installing base `systemd` from source.
 
 ## How to use this repo
 1. Use the commands in `setup.sh` to configure the environment. Note that the first line (commended out) will vary on your OS -- make sure you have the correct keyring app installed for your distro. The remaining commands will clone `mkosi` and Liberated `systemd`.
