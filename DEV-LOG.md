@@ -1,5 +1,8 @@
 # Liberated `systemd` -- dev log
 
+## May 6, 2026
+Running into build errors from upstream -- VM images built with the latest systemd (liberated or base) fail with the same error. As this would almost certainly cause user installs of Liberated systemd to crash, I will not be updating Liberated systemd until this is fixed. I'll update in a few days if this error persists.
+
 ## April 30, 2026
 The test failure is not resolving upstream -- this is not the first time that failures have lasted nearly week upstream. As such, I am going to change my push criteria to the following:
 1. the VM `mkosi` running Liberated `systemd` from source runs
