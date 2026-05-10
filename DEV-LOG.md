@@ -1,5 +1,8 @@
 # Liberated `systemd` -- dev log
 
+## May 9, 2026
+I've done somemore digging on this -- I'm still unsure of the origin of this issue. I do know, however, that it is not present in the version of Liberated systemd currently pushed. I am going to try to do a "partial upgrade" up to the commit in which the error  was introduced. At least in this case, we'll get some updates -- and it will help me start to determine which commit introduuced this issue. If it comes to it, I'll see about raising a PR against the upstream repo to fix it.
+
 ## May 6, 2026
 Running into build errors from upstream -- VM images built with the latest systemd (liberated or base) fail with the same error. As this would almost certainly cause user installs of Liberated systemd to crash, I will not be updating Liberated systemd until this is fixed. I'll update in a few days if this error persists.
 
