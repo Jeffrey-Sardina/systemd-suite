@@ -1,5 +1,8 @@
 # Liberated `systemd` -- dev log
 
+## May 11, 2026
+Upstream changes resolved the build issues. All has now been tested & pushed bringing Liberated `systemd` up to date.
+
 ## May 9, 2026
 I've done somemore digging on this -- I'm still unsure of the origin of this issue. I do know, however, that it is not present in the version of Liberated systemd currently pushed. I am going to try to do a "partial upgrade" up to the commit in which the error  was introduced. At least in this case, we'll get some updates -- and it will help me start to determine which commit introduuced this issue. If it comes to it, I'll see about raising a PR against the upstream repo to fix it.
 
