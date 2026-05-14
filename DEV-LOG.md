@@ -1,5 +1,8 @@
 # Liberated `systemd` -- dev log
 
+## May 14, 2026
+The failed test condition has been fixed upstream, meaning that base and Liberated systemd both now pass all tests.
+
 ## May 11, 2026
 Upstream changes resolved the build issues. All has now been tested & pushed bringing Liberated `systemd` up to date.
 
