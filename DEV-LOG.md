@@ -1,5 +1,20 @@
 # Liberated `systemd` -- dev log
 
+## May 15, 2026
+Upstream `systemd` has hit some failed tests again on `main`. Specifically, the failures are:
+```
+Summary of Failures:
+
+1471/1473 dist - systemd:check-version-ukify                                       FAIL             0.14s   exit status 2
+1472/1473 dist - systemd:check-help-ukify                                          FAIL             0.25s   exit status 2
+
+Ok:                1448
+Fail:              2   
+Skipped:           23  
+```
+
+These errors, as epected, as therefore also present in Liberated `systemd`. However, the VM still boots and can run commands -- both for both base and Liberated `systemd`. As such, I have still pushed these updates to Liberated `systemd`.
+
 ## May 14, 2026
 The failed test condition has been fixed upstream, meaning that base and Liberated systemd both now pass all tests.
 
