@@ -1,7 +1,7 @@
 # Liberated `systemd` -- dev log
 
 ## May 19, 2026
-Once again encountering build failures on Arch, so I'm not doing a full update yet. I also see that upstrteam there are *tons* of changes getting ready for v261.
+Once again encountering build failures on Arch, so I'm not doing a full update yet. It's still well under a week since the last update, so Liberated `systemd` remains on schedule. I also see that upstrteam there are *tons* of changes getting ready for v261.
 
 Some of the new changes are going to require updating the `main.patch` file -- but aside from that, everything is ready to produce a Liberated release of v261. My target for that, as with all updates, is forthe Liberated version to be released within 1 week of upstream publishing v261. 
 
