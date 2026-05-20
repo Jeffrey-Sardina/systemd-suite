@@ -1,5 +1,29 @@
 # Liberated `systemd` -- dev log
 
+## May 19, 2026
+Once again encountering build failures on Arch, so I'm not doing a full update yet. I also see that upstrteam there are *tons* of changes getting ready for v261.
+
+Some of the new changes are going to require updating the `main.patch` file -- but aside from that, everything is ready to produce a Liberated release of v261. My target for that, as with all updates, is forthe Liberated version to be released within 1 week of upstream publishing v261. 
+
+### Appeal for help
+At the time of doing so I *also* plan to raise a PR against upstream `systemd`, as a symbolic move to object to surveillance enablement. I doubt it will be accepted, but if ever there was a time to do so, it's when eyes will already be on thisproject because of the v261 release.
+
+If you are reading this, I would appreciate if you could help spread the word once Liberated `systemd` v261 is released. I understand this is a very divisive topic -- but please also remember that our actions will carry more weight if we make our point politely as well as firmly.
+
+I'm not sure of the exact timeline yet.
+
+### Appeal for testers
+If you want to help test v261 of Liberated `systemd`, please feel free to reach out. I'd love if we could assemble a list of officially tested OSes. What this involves is basically:
+1. INstall a VM of an OS of choice (I currently have my Ubuntu and Arch machines on Liberated `systemd`. But any OS that runs `systemd` is welcome -- and replicates are always great!)
+2. Install Liberated `systemd` on it.
+3. Make sure it works and is stable
+
+### Note to distro maintainers
+If you maintain a Linux distro and are considering moving to Liberated `systemd`, please feel free to reach out. I'd love to answer any questions you haveabout this project.
+
+### Final note
+Quick shout-out to all the Linux distros that (for years) have been saying "systemd is getting too centralized / universal / corporate, this could be an issue". You's were right. And even though (perhaps especially because) I run a `systemd` fork, I have huge respect for distros that go without it. 
+
 ## May 15, 2026
 Upstream `systemd` has hit some failed tests again on `main`. Specifically, the failures are:
 ```
