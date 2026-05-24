@@ -1,5 +1,8 @@
 # Liberated `systemd` -- dev log
 
+## May 24, 2026
+Unfortunately, base `systemd` build errors persist. This is not something that Liberated systemd can fix, as it does not relate to surveillance infrastructure. I'll keep checking (and updating here) every few days. This has happened often before -- upstream usually fixes the issueswithina weekor so. But since upstream is currentlyunstable andwill not produce usableimages, I don't feel comfortable merging the code and potentially cuasing broken installs. PID1 is not a place for instability.
+
 ## May 19, 2026
 Once again encountering build failures on Arch, so I'm not doing a full update yet. It's still well under a week since the last update, so Liberated `systemd` remains on schedule. I also see that upstrteam there are *tons* of changes getting ready for v261.
 
