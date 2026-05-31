@@ -4,6 +4,9 @@
 echo "This file is just for reference. It's not meant to be run. Exiting."
 exit
 
+# conda env
+conda activate sysd
+
 # one-off runs -- background setup
 apt install debian-archive-keyring # for some reason mkosi does not like ubuntu-keyring (?)
 git clone https://github.com/systemd/mkosi.git # pull mkosi if it's not there already

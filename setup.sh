@@ -11,3 +11,7 @@ git remote add upstream https://github.com/systemd/systemd.git
 # these repos are only ever pushed to
 git remote add gitea https://gitea.com/Jeffrey-Sardina/systemd.git
 git remote add codeberg https://codeberg.org/Jeffrey-Sardina/systemd.git
+
+# gather somePython dependencies
+conda create -n sysd python=3.13
+pip install pefile jinja2
