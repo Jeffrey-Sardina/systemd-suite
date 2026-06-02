@@ -1,5 +1,12 @@
 # Liberated `systemd` -- dev log
 
+## June 1, 2026
+Just pushed another update. Starting to check in on how to rebuild the patch file for this, since mroe code changes have been necessary to keep `systemd` free of age surveillance (in short: the command-line options for saving user birthdays were updated, and so I had to remove thema gain from a later commit).
+
+All tests continue to pass, and no build issues are coming up.
+
+Novaer, mellyn!
+
 ## May 31,2026
 Finally gotanupdate in -- had to change the merge process a bittodo so. All tests passing. Systemd 260.2 has been released, butdoes not inlcude sureveillance enablement. As such, I am not mnaking a Liberated version of it, as there are no changes to make. 
 
