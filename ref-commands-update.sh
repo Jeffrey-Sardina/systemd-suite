@@ -30,6 +30,7 @@ git merge upstream/main # manually read through the commit notes before doing th
 
 ## actually run the tests
 ## if these fail, it's probably an issue within Liberated systemd
+## check against upstream (unmodified) to see if the error exists there
 ../mkosi/bin/mkosi -f box -- meson compile -C build mkosi
 ../mkosi/bin/mkosi -f box -- meson test -C build --print-errorlogs -q
 sudo ../mkosi/bin/mkosi vm
