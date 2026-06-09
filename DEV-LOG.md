@@ -1,7 +1,11 @@
 # Liberated `systemd` -- dev log
 
+
+## Jun 9, 2026
+I've beenrunninginto build errors again -- will update more once I have run more tests.
+
 ## June 1, 2026
-Just pushed another update. Starting to check in on how to rebuild the patch file for this, since mroe code changes have been necessary to keep `systemd` free of age surveillance (in short: the command-line options for saving user birthdays were updated, and so I had to remove thema gain from a later commit).
+Just pushed another update. Starting to check in on how to rebuild the patch file for this, since more code changes have been necessary to keep `systemd` free of age surveillance (in short: the command-line options for saving user birthdays were updated, and so I had to remove thema gain from a later commit).
 
 All tests continue to pass, and no build issues are coming up.
 
