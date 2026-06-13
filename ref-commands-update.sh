@@ -31,6 +31,17 @@ git merge upstream/main # manually read through the commit notes before doing th
 ## actually run the tests
 ## if these fail, it's probably an issue within Liberated systemd
 ## check against upstream (unmodified) to see if the error exists there
-../mkosi/bin/mkosi -f box -- meson compile -C build mkosi
+## other possibl;e failure sources include: out-of-date MKOSI or not activating
+## the `sysd` conda  environment with Python dependencies installed.
+## also note that in some cases, the cached files under `.pkg/arch` (or w
+## hatever it is for your OS) can cause build issues.If you run into weird 
+## errors, try manually deleting those
+../mkosi/bin/mkosi --debug -f box -- meson compile -C build mkosi
 ../mkosi/bin/mkosi -f box -- meson test -C build --print-errorlogs -q
+
+## note: if this aboive fails, you might need to manually load kmod with
+## `sudo modprobe kvm_intel` or `sudo modprobe kvm_amd`; see:  
+##    - https://wiki.archlinux.org/title/KVM
+##    - https://wiki.archlinux.org/title/Kernel_module#Manual_module_handling
+## you can later unload this with `sudo modprobe -r kvm_intel # or kvm_amd`
 sudo ../mkosi/bin/mkosi vm
