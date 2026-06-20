@@ -40,15 +40,14 @@ echo "I have finished *manually* verifing that surveillance was removed"
 # are not part of the release
 mkdir releases/
 cp -r /wherever/you/downloaded/the/release/ ./releases/NAME
-cp -r /wherever/you/downloaded/the/release/ ./releases/replica
-cd releases/replica
+cp -r /wherever/you/downloaded/the/release/ ./releases/replica-NAME
+cd releases/replica-NAME
 
 # after this, run the commands in `ref-commands.sh` to test the
 # release. Note that the mkosi commands will need an additional `../` before
 # them, since you are one more directory down. Make sure all tests pass, and
 # that the created VM boots.
 echo "I have finished *manually* verifying that the VM launches all tests pass"
-rm -rf releases/replica # optional, but useful to avoid confusion going forward
 cd ..
 
 # if all tests pass, then it's time to build our own release packages
@@ -62,5 +61,11 @@ tar -cvzf distribute/NAME.tar.gz NAME/
 # create checksums for the release to be published alongside it
 cd distribute/
 sha256sum NAME.tar.gz > sha256sum.txt
+
+# note that if you want to install it yourself now, the `replica` directory we
+# created before is a great place to do that from! If you don't want to use it,
+# though (or once you have) you might want to clean it up
+cd ..
+rm -rf replica-NAME/ # optional
 
 # now, upload all of the data to Liberated systemd as a release!
