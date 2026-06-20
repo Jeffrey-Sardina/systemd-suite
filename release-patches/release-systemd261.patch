@@ -1,0 +1,619 @@
+diff --git a/CITATION.cff b/CITATION.cff
+index 91cedc21d6..c69d966d85 100644
+--- a/CITATION.cff
++++ b/CITATION.cff
+@@ -1,12 +1,11 @@
+ cff-version: 1.2.0
+-title: systemd
++title: Liberated systemd
+ type: software
+-repository-code: 'https://github.com/systemd/systemd'
+-url: 'https://systemd.io/'
++repository-code: 'https://github.com/Jeffrey-Sardina/systemd'
++url: 'https://github.com/Jeffrey-Sardina/systemd'
+ abstract: >-
+-  systemd is a suite of basic building blocks for a Linux
+-  system. It provides a system and service manager that runs
+-  as PID 1 and starts the rest of the system.
++  Liberated systemd is a fork of systemd that removes
++  surveillance enablement.
+ keywords:
+   - Linux
+   - PID 1
+diff --git a/README.md b/README.md
+index 68e14afeef..51d1bb9aa9 100644
+--- a/README.md
++++ b/README.md
+@@ -1,3 +1,135 @@
++# Liberated `systemd`
++Mass surveillance is bad, actually. So here's a fork of `systemd` with surveillance enablement removed, which will be kept up-to-date with other changes in `systemd/main`. However you use this, or do not, is your choice and yours alone.
++
++Note: https://github.com/Jeffrey-Sardina/liberated-systemd and https://github.com/Jeffrey-Sardina/systemd are interchangeable aliases. Most documenation refers to the latter for consistency, but either may be used.
++
++See the dev log here: https://github.com/Jeffrey-Sardina/systemd-suite/blob/main/DEV-LOG.md
++
++## Purpose
++The purpose of Liberated `systemd` is to do exactly one thing, and do it well: removing surveillance enablement from base `systemd`. Specifically, here is what I mean by surveillance: **surveillance is the tooling that enables or facilitates collection of any personal information that does not arise from technical needs for `systemd`**. The primary offender of this is, of course, age verification. If `systemd` later adds in support for other surveillance mechanisms, those will also be removed.
++
++What this also means is that Liberated `systemd` is not a divergent development project. It will not introduce new features, correct bugs or security issues, or implement optimizations. If you want to contribute to any of those things, the correct way to do so is to either raise a PR against the base `systemd` repo or create a fork. This repo exists only to remove surveillance enablement.
++
++## Installation
++Detailed blog post: https://medium.com/@jeffrey.sardina/installing-liberating-systemd-a-guide-by-the-author-2a9823192dd3
++
++### Risks (read this!)
++In short, first,you must understand the risks. Liberated systemd currently is, essentially, a nightly build. This means:
++- it might not be as stable as a named release of base systemd
++- it might have new, changed, or deprecated features relative to the most recent named releases of base systemd
++- therefore, there is potential for version mismatches with what your OS expects, as the nightly version is likely newer than that named release most distros install
++
++Further, Systemd is the first process to run on your computer -- if you corrupt it, your computer will not boot. So whenever you go about changing the installed version -- be very careful. This means:
++- record everything you do
++- have backups of all your data
++- have a live-bootable USB / CD / etc just in case
++- go slowly, and understand the effects of all commands before you run them
++- don't install anything else at the same time as Liberated systemd, and reboot after you install. This way, if you run into issues, you can track down what caused it more easily. Only install other programs once you've verified Liberated systemd is working correctly on a fresh boot.
++- make sure your distro is using systemd! *Almost* all Linux distros do (Debian, Ubuntu, Arch, Fedora, Red Hat, etc). But some distros, such as Artix and Void, use other init systems (and are anti-surveillance already). Liberated systemd only matters if your distro runs systemd.
++
++Everyone's local setup is different, and what works for one person might not work for you. I highly recommend test-installing in a VM before running on your actual computer.
++
++### Install from source
++Here is the set of commands you can use to install Liberated systemd from source. This is how I run Liberated systemd on my Arch and Ubuntu (26.04 / "resolute") systems, although the commands should work on any Linux distro. First, we check the current version of systemd:
++
++```bash
++systemctl --version # output will contain something like "systemd 259 (259.5-0ubuntu2)"
++```
++
++You'll also need to know your OS release:
++
++```bash
++cat /etc/*-release # see the line DISTRIB_RELEASE=<release>
++# in some cases (such as Ubuntu) you instead must use DISTRIB_CODENAME=<release>
++```
++
++Then, we pull and build Liberated systemd from source:
++
++```bash
++# pull Liberated systemd source code
++git clone https://github.com/Jeffrey-Sardina/systemd.git # this is an alias of https://github.com/Jeffrey-Sardina/liberated-systemd
++
++# pull mkosi -- latest version
++git clone https://github.com/systemd/mkosi.git
++
++# build the newimage with MKOSI
++# your distribtuion must beone of: fedora,debian,kali,ubuntu,postmarketos,arch,opensuse,mageia,centos,rhel,rhel-ubi,openmandriva,rocky,alma,azure,custom
++# replace <distribution> and <release> with their correct values
++# this may take some time
++cd systemd/ # or `cd liberated-systemd/`, if you cloned from the other alias
++../mkosi/bin/mkosi -d <distribution> -r <release> -t none -f # see: https://systemd.io/HACKING/
++```
++
++Finally, we install the built packages (again, see https://systemd.io/HACKING/). The command differs based on your OS:
++
++```bash
++# Fedora/CentOS
++run0 dnf upgrade build/mkosi.builddir/<distribution>~<release>~<architecture>/*.rpm
++
++#Debian/Ubuntu
++run0 apt-get install build/mkosi.builddir/<distribution>~<release>~<architecture>/*.deb
++# the ./ is needed to tell apt to look for local files, rather than online ones
++
++# Arch Linux
++run0 pacman --upgrade --needed --noconfirm build/mkosi.builddir/<distribution>~<release>~<architecture>/*.pkg.tar
++
++# OpenSUSE
++run0 zypper --non-interactive install --allow-unsigned-rpm build/mkosi.builddir/<distribution>~<release>~<architecture>/*.rpm
++```
++
++Finally, check the version again to verify you have upgraded:
++
++```bash
++systemctl --version # output should be different than the previous version check
++```
++
++Reboot your computer, and congratulations! Your computer is now liberated from age verification enablement!
++
++**Note that installing this way won't have automatic updates. You'll need to update manually to keep your system secure with the latest security patches.
++
++### List of community repos
++There are community-made packages you can install (aside - I'm stunned that others have done this, and absolutely love it!). That said, I did not create these, have not tested them, and cannot take credit (or responsibility) for them - so make sure you understand what they are doing before you install them. But if you'd like, here is a list of the ones I am aware of:
++- For Arch (via AUR): https://aur.archlinux.org/packages/systemd-liberated-git (Credit: [zeakz](https://aur.archlinux.org/account/zeakz))
++
++## How often is this updated (or, "why is Liberated `systemd` behind by X commits?")
++Liberated `systemd` will be updated at least weekly. Note that the base `systemd` repo is updated very frequently -- typically 20-30 commits in a day. Many of these come from merging PRs with multiple commits in their history. As a result, it's quite common to see Liberated `systemd` behind by 50 or more commits -- even when its code is only a few days behind. So check on the commit dates as well if you want to know how up-to-date Liberated `systemd` is.
++
++I do currently have a setup that would allow automating these updates. I have so far held back from full automation, however, since I prefer to scan new commits manually to make sure there are no more surveillance-enabling changes. So far this approach has worked well. If the manner in which I maintain this changes, I'll update here.
++
++## How is Liberated `systemd` implemented?
++It's quite simple: `systemd`, very nicely, has (mostly) atomic commits. There is exactly one commit (https://github.com/systemd/systemd/commit/acb6624fa19ddd68f9433fb0838db119fe18c3ed) that added in all tooling (both functional and data-wise) needed to enable age verification. I reversed the surveillance enablement in this commit, and have kept all other changes since. You can see the patch file used to revert the commit here: https://github.com/Jeffrey-Sardina/systemd-suite/blob/main/main.patch
++
++Since age collection is not needed for any aspect of `systemd`, this does not affect other aspects of `systemd`. Any downstream systems that attempt to call age-verification-related functions on Liberated `systemd` will therefore encounter an error. This is done by design. This is also why I have not simply created a "default age" as a lie -- it's about denying applications the ability to assume the presence of an API that enables mass surveillance.
++
++## How is Liberated `systemd` tested?
++To see how I run testing for this fork, see: https://github.com/Jeffrey-Sardina/systemd-suite. (In short, I run their unit tests and CI pipeline before pushing changes. This includes testing Liberated `systemd` in a VM. Pushes are only made once I verify that Liberated `systemd` is *as stabler as* base `systemd`.)
++
++## Where else can I find Liberated `systemd`?
++In order to allow users to avoid MicroSlop's ecosystem, this repository is made available via Gitea and Codeberg, on top of GitHub. The contents of all repositories are identical, and updated at the same time.
++- github - https://github.com/Jeffrey-Sardina/systemd
++- codeberg (mirror) - https://codeberg.org/Jeffrey-Sardina/systemd
++- gitea (mirror) - https://gitea.com/Jeffrey-Sardina/systemd
++
++Note that https://github.com/Jeffrey-Sardina/systemd and https://github.com/Jeffrey-Sardina/liberated-systemd are fully interchangeable aliases. https://github.com/Jeffrey-Sardina/liberated-systemd was created to allow the repo to be indexed on search engines. Both point to the same repo.
++
++If you are interested, you can find the Liberated `systemd` dev log here: https://github.com/Jeffrey-Sardina/systemd-suite/blob/main/DEV-LOG.md.
++
++## Have any other changes been made?
++Only in meta-data files. Specifically, aside from code changes needed to liberate systemd from surveillance tooling, I have edited:
++- this README (`/README.md`)
++- the Code of Conduct (`docs/CODE_OF_CONDUCT.md`)
++    - the section giving contacts of base `systemd` devs has been removed -- since the moderators of base `systemd` are, obviously, not a part of Liberated `systemd`.
++- the Contributing page (`docs/CONTRIBUTING.md`)
++    - this has been edited to explain how to contribute to Liberated `systemd`.
++- the Security page (`docs/SECURITY.md`)
++    - this has been edited to direct all security-related concerns to base `systemd`.
++- the Citation file (`CITATION.cff`)
++    - this has been edited to correctly identify this repo as Liberated `systemd`, a fork of `systemd`.
++
++The original `systemd` readme is included below for reference.
++
++---
++
+ ![Systemd](http://brand.systemd.io/assets/page-logo.png)
+ 
+ System and Service Manager
+diff --git a/docs/CODE_OF_CONDUCT.md b/docs/CODE_OF_CONDUCT.md
+index 08ccc30d79..5ee524fac5 100644
+--- a/docs/CODE_OF_CONDUCT.md
++++ b/docs/CODE_OF_CONDUCT.md
+@@ -1,11 +1,11 @@
+ ---
+-title: systemd Community Conduct Guidelines
++title: Liberated systemd Community Conduct Guidelines
+ category: Contributing
+ layout: default
+ SPDX-License-Identifier: LGPL-2.1-or-later
+ ---
+ 
+-# The systemd Community Conduct Guidelines
++# The Liberated systemd Community Conduct Guidelines
+ 
+ This document provides community guidelines for a safe, respectful, productive, and collaborative place for any person who is willing to contribute to systemd.
+ It applies to all “collaborative spaces”, which is defined as community communications channels (such as mailing lists, submitted patches, commit comments, etc.).
+@@ -14,12 +14,3 @@ It applies to all “collaborative spaces”, which is defined as community comm
+ - Participants must ensure that their language and actions are free of personal attacks and disparaging personal remarks.
+ - When interpreting the words and actions of others, participants should always assume good intentions.
+ - Behaviour which can be reasonably considered harassment will not be tolerated.
+-
+-## Enforcement
+-
+-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project team at systemd-conduct@googlegroups.com.
+-This team currently consists of David Strauss <<systemd-conduct@davidstrauss.net>>, Ekaterina Gerasimova (Kat) <<Kittykat3756@gmail.com>>, and Zbigniew Jędrzejewski-Szmek <<zbyszek@in.waw.pl>>.
+-In the unfortunate event that you wish to make a complaint against one of the members, you may instead contact any of the other members individually.
+-
+-All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances.
+-The project team is obligated to maintain confidentiality with regard to the reporter of an incident.
+diff --git a/docs/CONTRIBUTING.md b/docs/CONTRIBUTING.md
+index 8639cb0a87..437300b55d 100644
+--- a/docs/CONTRIBUTING.md
++++ b/docs/CONTRIBUTING.md
+@@ -7,136 +7,8 @@ SPDX-License-Identifier: LGPL-2.1-or-later
+ 
+ # Contributing
+ 
+-We welcome contributions from everyone. However, please follow these guidelines when posting a GitHub Pull Request or filing a GitHub Issue on the systemd project:
++Thank you so much for considering contributing to Liberated `systemd`!
+ 
+-## Filing Issues
++If you wish to assist with Liberated `systemd`, the I would welcome help with regards to testing and automation. See https://github.com/Jeffrey-Sardina/systemd-suite, which is where I manage testing and automation code. I will be updating that repo with areas I am working on in which assistance from other developers would be welcomed.
+ 
+-* We use [GitHub Issues](https://github.com/systemd/systemd/issues) **exclusively** for tracking **bugs** and **feature** **requests** (RFEs) of systemd.
+-  If you are looking for help, please try the forums of your distribution first, or [systemd-devel mailing list](https://lists.freedesktop.org/mailman/listinfo/systemd-devel) for general questions about systemd.
+-* We only track bugs in the **two** **most** **recently** **released** (non-rc) **versions** of systemd in the GitHub Issue tracker.
+-  If you are using an older version of systemd, please contact your distribution's bug tracker instead (see below).
+-  See [GitHub Release Page](https://github.com/systemd/systemd/releases) for the list of most recent releases.
+-* When filing a feature request issue (RFE), please always check first if the newest upstream version of systemd already implements the feature,
+-  and whether there's already an issue filed for your feature by someone else.
+-* When filing an issue, specify the **systemd** **version** you are experiencing the issue with. Also, indicate which **distribution** you are using.
+-* Please include an explanation how to reproduce the issue you are pointing out.
+-
+-Following these guidelines makes it easier for us to process your issue, and ensures we won't close your issue right-away for being misfiled.
+-
+-### Older downstream versions
+-
+-For older versions that are still supported by your distribution please use respective downstream tracker:
+-
+-* **Fedora** - [bugzilla](https://bugzilla.redhat.com/enter_bug.cgi?product=Fedora&component=systemd)
+-* **RHEL/CentOS stream** - [Jira](https://issues.redhat.com/secure/CreateIssueDetails!init.jspa?pid=12332745&issuetype=1&components=12380515&priority=10300) or [contribute to systemd-rhel @GitHub](https://github.com/redhat-plumbers#systemd)
+-* **Debian** - [bugs.debian.org](https://bugs.debian.org/cgi-bin/pkgreport.cgi?pkg=systemd)
+-
+-## Security vulnerability reports
+-
+-See [reporting of security vulnerabilities](https://systemd.io/SECURITY).
+-
+-## Posting Pull Requests
+-
+-* Make sure to post PRs only relative to a recent tip of the `main` branch.
+-* Follow our [Coding Style](https://systemd.io/CODING_STYLE) when contributing code. This is a requirement for all code we merge.
+-* Please make sure to test your change before submitting the PR. See the [Hacking guide](https://systemd.io/HACKING) for details on how to do this.
+-* Make sure to run the test suite locally, before posting your PR. We use a CI system, meaning we don't even look at a PR if the build fails or the unit tests don't pass.
+-* If you need to update the code in an existing PR, force-push into the same branch, overriding old commits with new versions.
+-* After you have pushed a new version, add a comment explaining the latest changes.
+-* If you are copying existing code from another source (eg: a compat header), please make sure the license is compatible with `LGPL-2.1-or-later`.
+-  If the license is not `LGPL-2.1-or-later`, please add a note to [`LICENSES/README.md`](https://github.com/systemd/systemd/blob/main/LICENSES/README.md).
+-* If the pull request stalls without review, post a ping in a comment after some time has passed.
+-  We are always short on reviewer time, and pull requests which haven't seen any recent activity can be easily forgotten.
+-* Github will automatically add the `please-review` label when a pull request is opened or updated.
+-  If you need more information after a review, you can comment `/please-review` on the pull request to have Github add the `please-review` label to the pull request.
+-
+-## Policy on the use of Large Language Models (LLMs) and AI tooling
+-
+-We expect everyone contributing to systemd to fully own their
+-contribution, be able to reason about it, be able to explain why things
+-were done a particular way and act as the full owner of that code. AI
+-tools are treated the same as traditional tooling like `sed`, `awk` or
+-`coccinelle`.
+-
+-For the purpose of this project, AI tools CANNOT be treated as author,
+-co-author or be credited in any way that would suggest any ownership
+-over the contribution.
+-
+-The contributor should have done all the thinking, planning and
+-understanding of the changes needed to resolve an issue or implement a
+-new feature prior to using automated tooling to perform the grunt work.
+-
+-Unguided use of those tools or the inability to prove understanding of
+-the code contributed will result in a loss of trust in that contributor
+-by project maintainers which can then lead to exclusion from any further
+-contribution to the project.
+-
+-As with any other submissions, authors are responsible for doing due
+-diligence and ensuring their submissions are compatible with the
+-project's license as documented in LICENSES/README.md.
+-
+-## Reviewing Pull Requests
+-
+-* See [filtered list of pull requests](https://github.com/systemd/systemd/pulls?q=is%3Aopen+is%3Apr+-label%3A%22reviewed%2Fneeds-rework+%F0%9F%94%A8%22+-label%3Aneeds-rebase+-label%3Agood-to-merge%2Fwith-minor-suggestions+-label%3A%22good-to-merge%2Fwaiting-for-ci+%F0%9F%91%8D%22+-label%3Apostponed+-label%3A%22needs-reporter-feedback+%E2%9D%93%22+-label%3A%22dont-merge+%F0%9F%92%A3%22+-label%3A%22ci-fails%2Fneeds-rework+%F0%9F%94%A5%22+sort%3Aupdated-desc) for requests that are ready for review.
+-* After performing a review, set
+-
+-  * `reviewed/needs-rework` if the pull request needs significant changes
+-  * `ci-fails/needs-rework` if the automatic tests fail and the failure is relevant to the pull request
+-  * `ci-failure-appears-unrelated` if the test failures seem irrelevant
+-  * `needs-rebase` if the pull request needs a rebase because of conflicts
+-  * `good-to-merge/waiting-for-ci` if the pull request should be merged without further review
+-  * `good-to-merge/with-minor-suggestions` if the pull request should be merged after an update without going through another round of reviews
+-
+-Unfortunately only members of the `systemd` organization on github can change labels.
+-If your pull request is mislabeled, make a comment in the pull request and somebody will fix it.
+-Reviews from non-members are still welcome.
+-
+-## Final Words
+-
+-We'd like to apologize in advance if we are not able to process and reply to your issue or PR right-away. We have a lot of work to do, but we are trying our best!
+-
+-Thank you very much for your contributions!
+-
+-# Backward Compatibility And External Dependencies
+-
+-We strive to keep backward compatibility where possible and reasonable.
+-The following are general guidelines, not hard rules, and case-by-case exceptions might be applied at the discretion of the maintainers.
+-The current set of build-time and runtime dependencies are documented in the [README](https://github.com/systemd/systemd/blob/main/README).
+-
+-## New features
+-
+-It is fine for new features/functionality/tools/daemons to require bleeding edge external dependencies, provided there
+-are runtime and build-time graceful fallbacks (e.g.: a daemon will not be built, runtime functionality will be skipped with a clear log message).
+-In case a new feature is added to both `systemd` and one of its dependencies, we expect the corresponding feature code to
+-be merged upstream in the dependency before accepting our side of the implementation.
+-Making use of new kernel syscalls can be achieved through compat wrappers in our tree (see: `src/basic/missing_syscall_def.h`),
+-and does not need to wait for glibc support.
+-
+-## External Build/Runtime Dependencies
+-
+-It is often tempting to bump external dependencies' minimum versions to cut cruft, and in general it's an essential part
+-of the maintenance process. But as a general rule, existing dependencies should not be bumped without strong
+-reasons. When possible, we try to keep compatibility with the most recent LTS releases of each mainstream distribution
+-for optional components, and with all currently maintained (i.e.: not EOL) LTS releases for core components. When in
+-doubt, ask before committing time to work on contributions if it's not clear that cutting support would be obviously
+-acceptable.
+-
+-## Kernel Requirements
+-
+-Same principles as with other dependencies should be applied. It is fine to require newer kernel versions for additional
+-functionality or optional features, but very strong reasons should be required for breaking compatibility for existing
+-functionality, especially for core components. It is not uncommon, for example, for embedded systems to be stuck on older
+-kernel versions due to hardware requirements, so do not assume everybody is running with latest and greatest at all times.
+-In general, [currently maintained LTS branches](https://www.kernel.org/category/releases.html) should keep being supported
+-for existing functionality.
+-
+-## `libsystemd.so`
+-
+-`libsystemd.so` is a shared public library, so breaking ABI/API compatibility would create lot of work for everyone, and is not allowed.
+-Instead, always add a new interface instead of modifying the signature of an existing function.
+-It is fine to mark an interface as deprecated to gently nudge users toward a newer one, but support for the old one must be maintained.
+-Symbol versioning and the compiler's deprecated attribute should be used when managing the lifetime of a public interface.
+-
+-## `libudev.so`
+-
+-`libudev.so` is a shared public library, and is still maintained, but should not gain new symbols at this point.
++If you want to contribute to features, bug fixes, optimizations, security enhancements, etc of `systemd`, please contribute to the base `systemd` repo: https://github.com/systemd/systemd?tab=contributing-ov-file
+diff --git a/docs/SECURITY.md b/docs/SECURITY.md
+index 2caeb102aa..38a3fa2ab9 100644
+--- a/docs/SECURITY.md
++++ b/docs/SECURITY.md
+@@ -7,23 +7,4 @@ SPDX-License-Identifier: LGPL-2.1-or-later
+ 
+ # Reporting of Security Vulnerabilities
+ 
+-If you discover a security vulnerability, we'd appreciate a non-public disclosure.
+-systemd developers can be contacted privately by creating a new **[Security Advisory on GitHub](https://github.com/systemd/systemd/security/advisories/new)** (preferred)
+-or via the [systemd-security@redhat.com](mailto:systemd-security@redhat.com) mailing list.
+-The disclosure will be coordinated with distributions.
+-
+-(The [issue tracker](https://github.com/systemd/systemd/issues) and [systemd-devel mailing list](https://lists.freedesktop.org/mailman/listinfo/systemd-devel) are fully public.)
+-
+-Subscription to the Security Advisories and/or systemd-security mailing list is open to **regular systemd contributors and people working in the security teams of various distributions**.
+-Those conditions should be backed by publicly accessible information (ideally, a track of posts and commits from the mail address in question).
+-If you fall into one of those categories and wish to be subscribed,
+-contact the maintainers or submit a **[subscription request](https://www.redhat.com/mailman/listinfo/systemd-security)**.
+-
+-# Requirements for a Valid Report
+-
+-- Please ensure the issue is reproducible on main.
+-- Please ensure a fully working, end-to-end reproducer is provided.
+-- Please ensure the reproducer is real-world and not simulated or abstracted.
+-- Please ensure the reproducer demonstrably violates a security boundary.
+-- Please understand that most of our maintainers are volunteers and already have a heavy review burden. While we will try to triage and fix issues in a timely manner, we cannot guarantee any fixed timeline for issue resolution.
+-- While modern industry practices around coordinated disclosures encourage public disclosure to avoid vendors stonewalling researchers, we are an open source project that would gain little from needlessly stonewalling researchers. We thus kindly request that reporters do not publicly disclose issues they have reported to us before an agreed-to disclosure date.
++All security concerns should be raised with base `systemd` (https://github.com/systemd/systemd?tab=security-ov-file).
+diff --git a/docs/USER_RECORD.md b/docs/USER_RECORD.md
+index 5335e145b5..9d6d8c1d03 100644
+--- a/docs/USER_RECORD.md
++++ b/docs/USER_RECORD.md
+@@ -273,9 +273,6 @@ This must be a string, and should follow the semantics defined in the
+ It's probably wise to use a location string processable by geo-location subsystems, but this is not enforced nor required.
+ Example: `Berlin, Germany` or `Basement, Room 3a`.
+ 
+-`birthDate` → A string in ISO 8601 calendar date format (`YYYY-MM-DD`) indicating the user's date
+-of birth. The earliest representable year is 1900. This field is optional.
+-
+ `disposition` → A string, one of `intrinsic`, `system`, `dynamic`, `regular`,
+ `container`, `foreign`, `reserved`. If specified clarifies the disposition of the user,
+ i.e. the context it is defined in.
+diff --git a/man/homectl.xml b/man/homectl.xml
+index bb827d1e6b..a59efd7112 100644
+--- a/man/homectl.xml
++++ b/man/homectl.xml
+@@ -366,16 +366,6 @@
+         <xi:include href="version-info.xml" xpointer="v245"/></listitem>
+       </varlistentry>
+ 
+-      <varlistentry>
+-        <term><option>--birth-date=<optional><replaceable>DATE</replaceable></optional></option></term>
+-
+-        <listitem><para>Takes a birth date for the user in ISO 8601 calendar date format
+-        (<literal>YYYY-MM-DD</literal>). The earliest representable year is 1900. If an empty string is
+-        passed the birth date is reset to unset.</para>
+-
+-        <xi:include href="version-info.xml" xpointer="v261"/></listitem>
+-      </varlistentry>
+-
+       <varlistentry>
+         <term><option>--icon-name=<replaceable>ICON</replaceable></option></term>
+ 
+diff --git a/src/basic/time-util.c b/src/basic/time-util.c
+index eb74de32c2..6e7866c2a8 100644
+--- a/src/basic/time-util.c
++++ b/src/basic/time-util.c
+@@ -1932,13 +1932,9 @@ int parse_calendar_date_full(const char *s, bool allow_pre_epoch, usec_t *ret_us
+         usec_t usec = USEC_INFINITY;
+ 
+         if (allow_pre_epoch) {
+-                /* For birth dates we use timegm() directly since we need to accept pre-epoch dates.
+-                 * timegm() returns (time_t) -1 both on error and for one second before the epoch.
+-                 * Initialize wday to -1 beforehand: if it remains -1 after the call, it's a genuine
+-                 * error; if timegm() changed it, the date was successfully normalized. */
+-                copy_tm.tm_wday = -1;
+-                if (timegm(&copy_tm) == (time_t) -1 && copy_tm.tm_wday == -1)
+-                        return -EINVAL;
++                /* This part of the function was for birthday surveillance. It therefore must be removed.
++                 * This function does have legitimate uses, however, so we don't delete the whole thing .*/
++                return 0;
+         } else {
+                 r = mktime_or_timegm_usec(&copy_tm, /* utc= */ true, &usec);
+                 if (r < 0)
+diff --git a/src/basic/time-util.h b/src/basic/time-util.h
+index fdaf11edcb..64756c68e0 100644
+--- a/src/basic/time-util.h
++++ b/src/basic/time-util.h
+@@ -190,17 +190,13 @@ static inline int parse_calendar_date(const char *s, usec_t *ret) {
+         return parse_calendar_date_full(s, /* allow_pre_epoch= */ false, ret, NULL);
+ }
+ 
++/* this is just an empty value used elsewhere. It does not enable surveillance, but is used
++ * in legitimate functions. */
+ #define BIRTH_DATE_UNSET                        \
+         (const struct tm) {                     \
+                 .tm_year = INT_MIN,             \
+         }
+ 
+-#define BIRTH_DATE_IS_SET(tm) ((tm).tm_year != INT_MIN)
+-
+-static inline int parse_birth_date(const char *s, struct tm *ret) {
+-        return parse_calendar_date_full(s, /* allow_pre_epoch= */ true, NULL, ret);
+-}
+-
+ uint32_t usec_to_jiffies(usec_t usec);
+ usec_t jiffies_to_usec(uint32_t jiffies);
+ 
+diff --git a/src/home/homectl.c b/src/home/homectl.c
+index 3d3cd6087d..4cd61896aa 100644
+--- a/src/home/homectl.c
++++ b/src/home/homectl.c
+@@ -4249,23 +4249,6 @@ static int parse_argv(int argc, char *argv[], char ***remaining_args) {
+                                 return r;
+                         break;
+ 
+-                OPTION_LONG_FLAGS(OPTION_OPTIONAL_ARG, "birth-date", "DATE",
+-                                  "Set user birth date (YYYY-MM-DD)"):
+-                        if (isempty(opts.arg)) {
+-                                r = drop_from_identity("birthDate");
+-                                if (r < 0)
+-                                        return r;
+-                        } else {
+-                                r = parse_birth_date(opts.arg, /* ret= */ NULL);
+-                                if (r < 0)
+-                                        return log_error_errno(r, "Invalid birth date (expected YYYY-MM-DD): %s", opts.arg);
+-
+-                                r = parse_string_field(&arg_identity_extra, "birthDate", opts.arg);
+-                                if (r < 0)
+-                                        return r;
+-                        }
+-                        break;
+-
+                 OPTION_LONG("icon-name", "NAME", "Icon name for user"):
+                         r = parse_string_field(match_identity ?: &arg_identity_extra, "iconName", opts.arg);
+                         if (r < 0)
+diff --git a/src/shared/user-record-show.c b/src/shared/user-record-show.c
+index 11edf2557c..a43328c9fe 100644
+--- a/src/shared/user-record-show.c
++++ b/src/shared/user-record-show.c
+@@ -342,8 +342,6 @@ void user_record_show(UserRecord *hr, bool show_full_group_info) {
+                 printf("       Email: %s\n", hr->email_address);
+         if (hr->location)
+                 printf("    Location: %s\n", hr->location);
+-        if (BIRTH_DATE_IS_SET(hr->birth_date))
+-                printf("  Birth Date: %04d-%02d-%02d\n", hr->birth_date.tm_year + 1900, hr->birth_date.tm_mon + 1, hr->birth_date.tm_mday);
+         if (hr->password_hint)
+                 printf(" Passw. Hint: %s\n", hr->password_hint);
+         if (hr->icon_name)
+diff --git a/src/shared/user-record.c b/src/shared/user-record.c
+index 3a005df08e..8296d92aa1 100644
+--- a/src/shared/user-record.c
++++ b/src/shared/user-record.c
+@@ -46,7 +46,6 @@ UserRecord* user_record_new(void) {
+                 .nice_level = INT_MAX,
+                 .not_before_usec = UINT64_MAX,
+                 .not_after_usec = UINT64_MAX,
+-                .birth_date = BIRTH_DATE_UNSET,
+                 .locked = -1,
+                 .storage = _USER_STORAGE_INVALID,
+                 .access_mode = MODE_INVALID,
+@@ -418,28 +417,6 @@ static int json_dispatch_filename_or_path(const char *name, sd_json_variant *var
+         return 0;
+ }
+ 
+-static int json_dispatch_birth_date(const char *name, sd_json_variant *variant, sd_json_dispatch_flags_t flags, void *userdata) {
+-        struct tm *ret = ASSERT_PTR(userdata);
+-        const char *s;
+-        int r;
+-
+-        if (sd_json_variant_is_null(variant)) {
+-                *ret = BIRTH_DATE_UNSET;
+-                return 0;
+-        }
+-
+-        if (!sd_json_variant_is_string(variant))
+-                return json_log(variant, flags, SYNTHETIC_ERRNO(EINVAL), "JSON field '%s' is not a string.", strna(name));
+-
+-        s = sd_json_variant_string(variant);
+-
+-        r = parse_birth_date(s, ret);
+-        if (r < 0)
+-                return json_log(variant, flags, r, "JSON field '%s' is not a valid ISO 8601 date (expected YYYY-MM-DD).", strna(name));
+-
+-        return 0;
+-}
+-
+ static int json_dispatch_home_directory(const char *name, sd_json_variant *variant, sd_json_dispatch_flags_t flags, void *userdata) {
+         char **s = userdata;
+         const char *n;
+@@ -1551,8 +1528,7 @@ int user_group_record_mangle(
+                        /* Personally Identifiable Information (PII) — avoid leaking in logs */
+                        "realName",
+                        "location",
+-                       "emailAddress",
+-                       "birthDate")
++                       "emailAddress")
+                 sd_json_variant_sensitive(sd_json_variant_by_key(v, key));
+ 
+         /* Check if we have the special sections and if they match our flags set */
+@@ -1647,7 +1623,6 @@ int user_record_load(UserRecord *h, sd_json_variant *v, UserRecordLoadFlags load
+                 { "emailAddress",               SD_JSON_VARIANT_STRING,        sd_json_dispatch_string,              offsetof(UserRecord, email_address),                 SD_JSON_STRICT },
+                 { "iconName",                   SD_JSON_VARIANT_STRING,        sd_json_dispatch_string,              offsetof(UserRecord, icon_name),                     SD_JSON_STRICT },
+                 { "location",                   SD_JSON_VARIANT_STRING,        sd_json_dispatch_string,              offsetof(UserRecord, location),                      0              },
+-                { "birthDate",                  SD_JSON_VARIANT_STRING,        json_dispatch_birth_date,             offsetof(UserRecord, birth_date),                    0              },
+                 { "disposition",                SD_JSON_VARIANT_STRING,        json_dispatch_user_disposition,       offsetof(UserRecord, disposition),                   0              },
+                 { "lastChangeUSec",             _SD_JSON_VARIANT_TYPE_INVALID, sd_json_dispatch_uint64,              offsetof(UserRecord, last_change_usec),              0              },
+                 { "lastPasswordChangeUSec",     _SD_JSON_VARIANT_TYPE_INVALID, sd_json_dispatch_uint64,              offsetof(UserRecord, last_password_change_usec),     0              },
+diff --git a/src/shared/user-record.h b/src/shared/user-record.h
+index aee78694a9..648dedb172 100644
+--- a/src/shared/user-record.h
++++ b/src/shared/user-record.h
+@@ -273,7 +273,6 @@ typedef struct UserRecord {
+         char *password_hint;
+         char *icon_name;
+         char *location;
+-        struct tm birth_date;
+ 
+         char *blob_directory;
+         Hashmap *blob_manifest;
+diff --git a/src/test/test-time-util.c b/src/test/test-time-util.c
+index 8250a03e29..4dfc674101 100644
+--- a/src/test/test-time-util.c
++++ b/src/test/test-time-util.c
+@@ -1309,36 +1309,4 @@ TEST(parse_calendar_date) {
+         ASSERT_ERROR(parse_calendar_date("06-15-2023", &usec), EINVAL); /* wrong order */
+ }
+ 
+-TEST(parse_birth_date) {
+-        struct tm tm;
+-
+-        /* Valid dates */
+-        ASSERT_OK(parse_birth_date("2000-06-15", &tm));
+-        ASSERT_EQ(tm.tm_year, 100);  /* 2000 - 1900 */
+-        ASSERT_EQ(tm.tm_mon, 5);     /* June, 0-indexed */
+-        ASSERT_EQ(tm.tm_mday, 15);
+-
+-        /* Pre-epoch dates */
+-        ASSERT_OK(parse_birth_date("1960-03-25", &tm));
+-        ASSERT_EQ(tm.tm_year, 60);
+-        ASSERT_EQ(tm.tm_mon, 2);
+-        ASSERT_EQ(tm.tm_mday, 25);
+-
+-        /* NULL ret is allowed (validation only) */
+-        ASSERT_OK(parse_birth_date("2000-01-01", NULL));
+-
+-        /* Non-date fields should not be relied upon */
+-        ASSERT_OK(parse_birth_date("2000-06-15", &tm));
+-        ASSERT_FALSE(BIRTH_DATE_IS_SET(BIRTH_DATE_UNSET));
+-
+-        /* Non-normalized dates */
+-        ASSERT_ERROR(parse_birth_date("2023-02-29", &tm), EINVAL);
+-        ASSERT_ERROR(parse_birth_date("2023-04-31", &tm), EINVAL);
+-
+-        /* Malformed input */
+-        ASSERT_ERROR(parse_birth_date("", &tm), EINVAL);
+-        ASSERT_ERROR(parse_birth_date("not-a-date", &tm), EINVAL);
+-        ASSERT_ERROR(parse_birth_date("2023-06-15T00:00:00", &tm), EINVAL);
+-}
+-
+ DEFINE_TEST_MAIN_WITH_INTRO(LOG_INFO, intro);
+diff --git a/src/test/test-user-record.c b/src/test/test-user-record.c
+index 480a3f33eb..c807ffe83a 100644
+--- a/src/test/test-user-record.c
++++ b/src/test/test-user-record.c
+@@ -96,15 +96,6 @@ TEST(self_changes) {
+              SD_JSON_BUILD_PAIR_OBJECT("privileged",
+                                     SD_JSON_BUILD_PAIR_UNSIGNED("notInHardCodedList", 99999)));
+         ASSERT_TRUE(user_record_self_changes_allowed(curr, new));
+-
+-        /* birthDate is NOT self-modifiable (admin-only) */
+-        USER(&curr,
+-             SD_JSON_BUILD_PAIR_STRING("userName", "test"),
+-             SD_JSON_BUILD_PAIR_STRING("birthDate", "1990-01-01"));
+-        USER(&new,
+-             SD_JSON_BUILD_PAIR_STRING("userName", "test"),
+-             SD_JSON_BUILD_PAIR_STRING("birthDate", "1990-06-15"));
+-        ASSERT_FALSE(user_record_self_changes_allowed(curr, new));
+ }
+ 
+ DEFINE_TEST_MAIN(LOG_INFO);

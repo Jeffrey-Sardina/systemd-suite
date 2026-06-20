@@ -19,7 +19,7 @@ So basically: if you install Liberated `systemd` from source, you'll get somethi
 2. See the commands in `ref-commands-release.sh` to learn how to prepare a release. Note that this file is there for reference -- you are not meant to run it.
 
 ## How this works
-Liberated `systemd` uses git patches to patch out surveillance enablement in base `systemd`. The patch used can be found in `main.patch`, but is currently slightly out of date (I'm working on that!). If you want to know *exactly* what is removed in systemd code, this file will tell you all of that.
+Liberated `systemd` uses git patches to patch out surveillance enablement in base `systemd`. The patch used can be found in `main.patch`. If you want to know *exactly* what is removed in systemd code, this file will tell you all of that. Note that separate patches have been made for each named release (see `release-patches/`), based on the changes at that point in time.
 
 Note that README changes are not included in that patch. The Liberated `systemd` readme is maintained separately, because:
 1. The patch is meant to be minimal, and (mostly) constant. It should not have to change every time I find a typo in the readme, or add a sentence.
@@ -30,8 +30,7 @@ Note that README changes are not included in that patch. The Liberated `systemd`
 There are several tasks I am currently working on to improve Liberated `systemd`. If you want to help the project, this would be a great place to step in!
 
 Here's what I still need to do:
-1. Develop formal releases to mirror future named releases of base `systemd`. As my goal is to enable use of Liberated `systemd` as a stable replacement to base `systemd`, developing releases will be very important. GIt patches should take this most of the way there, and I'm slowly building up infrastructure for this to prepare for v261.
-2. Liberating `lib32-systemd`. It currently draws upon base `systemd`; a liberated version drawing on Liberated `systemd` would be ideal for those who depend on it.
+1. Liberating `lib32-systemd`. It currently draws upon base `systemd`; a liberated version drawing on Liberated `systemd` would be ideal for those who depend on it.
 
 ## Contributing and Licensing
 This repo is made available under the same license as base `systemd` and Liberated `systemd`: the GNU General Public License v2. All code contributions must be made available under the same license.

@@ -1,7 +1,10 @@
 # Liberated `systemd` -- dev log
 
 ## June 19,2026
-I see thatsystemd 261 has been released. I'm activaly working on a Liberated version -- hopefully today. I'll update again when that's published.
+The release has been built and tested. Lots more docs in. I'm going to install this on my own computer before making a final push.
+
+## June 19,2026
+I see that systemd 261 has been released. I'm activaly working on a Liberated version -- hopefully today. I'll update again when that's published.
  
 ## June 13, 2026
 I apologise for the delay here. It tujens out that the bug is always in the last place you look... In this case, a cache I *thought* I was clearing was not getting cleared, and the `systemd` build process was throwing errors because it expected parts of it to be empty. The good news is, it was just caching -- not an issue with (Liberated) `systemd` code. We now have successful builds, and 0 test failures. I *also* had some KVM issues, but the Arch Wiki saved me there. I love that wiki.
