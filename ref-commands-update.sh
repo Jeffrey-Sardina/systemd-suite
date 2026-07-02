@@ -33,9 +33,11 @@ git merge upstream/main # manually read through the commit notes before doing th
 ## check against upstream (unmodified) to see if the error exists there
 ## other possibl;e failure sources include: out-of-date MKOSI or not activating
 ## the `sysd` conda  environment with Python dependencies installed.
-## also note that in some cases, the cached files under `.pkg/arch` (or w
-## hatever it is for your OS) can cause build issues.If you run into weird 
-## errors, try manually deleting those
+## also note that in some cases, the cached files under `./pkg/arch/` (or
+## whatever it is for your OS) can cause build issues. If you run into weird
+## errors, try manually deleting those. You can make the output less verbose by
+## removing --debug fromthe firstcommand -- but that is,as you would imagine,
+## useful ifyou need to debug.
 ../mkosi/bin/mkosi --debug -f box -- meson compile -C build mkosi
 ../mkosi/bin/mkosi -f box -- meson test -C build --print-errorlogs -q
 

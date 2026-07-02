@@ -1,5 +1,13 @@
 # Liberated `systemd` -- dev log
 
+## July 1, 2026
+Sorry for the delay here -- I've been busy, and running into some build errors that turned out to be "yo Jeffrey why did you not update mkosi, you literally put that in your own docs". Oops.
+
+I've seen one more commit come through re-working the age surveillance code -- it has been sanitized.
+
+## June 19,2026
+Coming to you live from Liberated systemd 261!! Install went forwards without a hitch on Arch. Making the release formally now. 
+
 ## June 19,2026
 The release has been built and tested. Lots more docs in. I'm going to install this on my own computer before making a final push.
 
