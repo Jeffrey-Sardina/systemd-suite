@@ -1,5 +1,8 @@
 # Liberated `systemd` -- dev log
 
+## July 9, 2026
+Running into what looks like a very easily resolved build error -- likely local config and not Liberated systemd. Once I resolve that I'll do a push. I should have more time in the next couple days for that.
+
 ## July 1, 2026
 Sorry for the delay here -- I've been busy, and running into some build errors that turned out to be "yo Jeffrey why did you not update mkosi, you literally put that in your own docs". Oops.
 
