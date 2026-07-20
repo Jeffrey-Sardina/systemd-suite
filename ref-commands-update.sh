@@ -4,7 +4,7 @@
 echo "This file is just for reference. It's not meant to be run. Exiting."
 exit
 
-# conda env
+# conda env (most Linux distros, aside from NixOS)
 conda activate sysd
 
 # one-off runs -- background setup

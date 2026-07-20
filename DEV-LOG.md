@@ -1,5 +1,12 @@
 # Liberated `systemd` -- dev log
 
+## July 19, 2026
+I'm moving to containerization of this whole pipeline for all the usual reasons (portability, consistency, isolation, etc). You might notice this repo get slightly messier for a short bit, and things will start being shifted around.
+
+I realize that the manner in which I have set up `podman` is not ideal -- there are better workflows using `podman compose`. But as I 1) have this working well as-is, and 2) am still learning the details of `podman compose`, I'm leaving the shift of those standards for later.
+
+I've also started using NixOS (aside: I LOVE NixOS), and that introduces some complexities from a build-and-install perspective that other Linux OS's don't have. What this really means is that I'll be building up docs for Liberated `systemd` on NixOS, plus install instructions and the such, as I learn more about Nix.
+
 ## July 9, 2026
 Running into what looks like a very easily resolved build error -- likely local config and not Liberated systemd. Once I resolve that I'll do a push. I should have more time in the next couple days for that.
 
