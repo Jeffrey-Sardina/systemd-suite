@@ -5,18 +5,14 @@ This is where I manage all testing and automation related tasks for Liberated `s
 ## The testing pipeline
 Currently, this is nothing fancy. Once changes are made to the `systemd` fork, all tests in `test.sh` are run. These are the same CI tests base `systemd` requires for all pull requests (see: https://systemd.io/HACKING/). In short, this consists of creating a VM running `systemd` from the (new) source code, and verifying that it runs.
 
-New pushes of Liberated `systemd` code are only made under two conditions:
-- Liberated `systemd` can be used to start a VM
-- Liberated `systemd` is *as stable as* base systemd.
+New pushes of Liberated `systemd` code are only made under the condition that it appears *as stable as* base `systemd`. That means that it may be pushed in a state that contains errors, bugs, or failed tests *if base `systemd` also contains those errors, bugs,or failed tests*. This change was made necessary by the fact that base `systemd` often has long-standing (for a week or more) failed tests. If Liberated `systemd` did not track changes during this time, it would become far out of date.
 
-This means that if base `systemd` contains failed unit tests that also fail in Liberated `systemd`, Liberated systemd will still track upstream changes. This change was made necessary by the fact that base `systemd` often has long-standing (for a week or more) failed tests. If Liberated `systemd` did not track changes during this time, it would become far out of date.
-
-So basically: if you install Liberated `systemd` from source, you'll get something *as stable as* installing base `systemd` from source.
+Finally, note that *I make mistakes*. Reinstalling `systemd`is not something you should do lightly -- please always test it yourself *especially when intsalling a nightly build that might be unstable*.
 
 ## How to use this repo
 1. Use the commands in `setup.sh` to configure the environment. Note that the first line (commended out) will vary on your OS -- make sure you have the correct keyring app installed for your distro. The remaining commands will clone `mkosi` and Liberated `systemd`.
 2. See the commands in `ref-commands-update.sh` to learn how to run updates and the test. Monitor the terminal and check to see if 1)all tests pass 2) the VM buildscorrectly,and 3) the VM launches correctly. Note that this file is there for reference -- you are not meant to run it.
-2. See the commands in `ref-commands-release.sh` to learn how to prepare a release. Note that this file is there for reference -- you are not meant to run it.
+3. See the commands in `ref-commands-release.sh` to learn how to prepare a release. Note that this file is there for reference -- you are not meant to run it.
 
 ## How this works
 Liberated `systemd` uses git patches to patch out surveillance enablement in base `systemd`. The patch used can be found in `main.patch`. If you want to know *exactly* what is removed in systemd code, this file will tell you all of that. Note that separate patches have been made for each named release (see `release-patches/`), based on the changes at that point in time.
