@@ -1,5 +1,10 @@
 # Liberated `systemd` -- dev log
 
+## September 16, 2026
+Still at this -- sorry for the break, one-person dev teams be like. Anyway, made a new push. I've also removed my former attempt at containerization -- I never managed to get it working, sadly. Same with running this project from Nix -- figuting out a new package manager (and how it interacts with dev tools needed for this project) and debugging issues in Liberated systemd / upsteam was a bit much. So I've moved back to an Arch-based system, and I'll be maintaining this from there. (I suppose I'm a bit of a distro-hopper.)
+
+Anyway, happy anti-surveillance!
+
 ## July 19, 2026
 I'm moving to containerization of this whole pipeline for all the usual reasons (portability, consistency, isolation, etc). You might notice this repo get slightly messier for a short bit, and things will start being shifted around.
 

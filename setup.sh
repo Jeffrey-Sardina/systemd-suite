@@ -18,4 +18,5 @@ git remote add codeberg https://codeberg.org/Jeffrey-Sardina/systemd.git
 
 # gather some Python dependencies (most linux distros, not needed on NixOS)
 conda create -n sysd python=3.13
+conda activate sysd
 pip install pefile jinja2
