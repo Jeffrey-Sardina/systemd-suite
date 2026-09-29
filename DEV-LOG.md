@@ -1,5 +1,9 @@
 # Liberated `systemd` -- dev log
 
+## September 29, 2026
+Systemd 262 is out -- I'm working on making a Liberated release of it. Hopefully that will be out today. If not, within a couple days.
+
+
 ## September 16, 2026
 Still at this -- sorry for the break, one-person dev teams be like. Anyway, made a new push. I've also removed my former attempt at containerization -- I never managed to get it working, sadly. Same with running this project from Nix -- figuting out a new package manager (and how it interacts with dev tools needed for this project) and debugging issues in Liberated systemd / upsteam was a bit much. So I've moved back to an Arch-based system, and I'll be maintaining this from there. (I suppose I'm a bit of a distro-hopper.)
 
