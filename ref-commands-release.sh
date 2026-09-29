@@ -43,10 +43,10 @@ cp -r /wherever/you/downloaded/the/release/ ./releases/NAME
 cp -r /wherever/you/downloaded/the/release/ ./releases/replica-NAME
 cd releases/replica-NAME
 
-# after this, run the commands in `ref-commands.sh` to test the
-# release. Note that the mkosi commands will need an additional `../` before
-# them, since you are one more directory down. Make sure all tests pass, and
-# that the created VM boots.
+# after this, run the testing / VM commands in `ref-commands-update.sh` to test
+# the release. Note that the mkosi commands will need an additional `../`
+# before them, since you are one more directory down. Make sure all tests pass,
+# and that the created VM boots.
 echo "I have finished *manually* verifying that the VM launches all tests pass"
 cd ..
 
