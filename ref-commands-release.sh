@@ -23,15 +23,15 @@ tar -xvf NAME # this is the name of the release folder
 
 # now we apply the patch to remove surveillance enablement
 # note: by default this applies to all files in the working dir
-# Also make sure that you run this *outsied* a git repo,or `git apply` will 
+# Also make sure that you run this *outsied* a git repo, or `git apply` will 
 # get confused and not do anything useful. Or, well, not do anything at all
 # more like.
 cd NAME
 git apply ../../main.patch
 cd ..
 
-# at this point, MANUALLY verify that birthday surveillance nonsense has been
-# removed. If you want a command to run, here  you go:
+# at this point, MANUALLY verify that age surveillance has been removed. If you
+# want a command to run, here  you go:
 echo "I have finished *manually* verifing that surveillance was removed"
 
 # we move the source files into a `releases` directory for testing
