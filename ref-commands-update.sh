@@ -41,7 +41,7 @@ git merge upstream/main # manually read through the commit notes before doing th
 ../mkosi/bin/mkosi --debug -f box -- meson compile -C build mkosi
 ../mkosi/bin/mkosi -f box -- meson test -C build --print-errorlogs -q
 
-## note: if this aboive fails, you might need to manually load kmod with
+## note: if this above fails, you might need to manually load kmod with
 ## `sudo modprobe kvm_intel` or `sudo modprobe kvm_amd`; see:  
 ##    - https://wiki.archlinux.org/title/KVM
 ##    - https://wiki.archlinux.org/title/Kernel_module#Manual_module_handling
